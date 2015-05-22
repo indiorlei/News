@@ -15,7 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'NewsPlugin' ) ) :
-
     class NewsPlugin {
         public $version = '1.0';
 
@@ -23,7 +22,6 @@ if ( ! class_exists( 'NewsPlugin' ) ) :
             $news = new self();
         }
 
-        
         public function __construct() {
             $this->define_constants();
             $this->includes();
@@ -31,7 +29,6 @@ if ( ! class_exists( 'NewsPlugin' ) ) :
             $this->create_tables();
         }
 
-        
         private function define_constants() {
             define( 'NEWS_VERSION',    $this->version );
             define( 'NEWS_BASE_URL',   trailingslashit( plugins_url( 'news' ) ) );
@@ -39,7 +36,6 @@ if ( ! class_exists( 'NewsPlugin' ) ) :
             define( 'NEWS_PATH',       plugin_dir_path( __FILE__ ) );
         }
 
-        
         private function plugin_classes() {
             return array(
                 'newssystemcheck'  => NEWS_PATH . 'includes/news.systemcheck.class.php',
@@ -47,7 +43,6 @@ if ( ! class_exists( 'NewsPlugin' ) ) :
                 );
         }
 
-        
         private function includes() {
             $autoload_is_disabled = defined( 'NEWS_AUTOLOAD_CLASSES' ) && NEWS_AUTOLOAD_CLASSES === false;
             if ( function_exists( "spl_autoload_register" ) && ! ( $autoload_is_disabled ) ) {
@@ -66,7 +61,6 @@ if ( ! class_exists( 'NewsPlugin' ) ) :
             }
         }
 
-
         /**
         * Autoload news classes to reduce memory consumption
         */
@@ -77,7 +71,6 @@ if ( ! class_exists( 'NewsPlugin' ) ) :
                 require_once( $classes[$class_name] );
             }
         }
-
 
         /**
         * Hook news into WordPress
@@ -92,14 +85,12 @@ if ( ! class_exists( 'NewsPlugin' ) ) :
             }
         }
 
-
         /**
         * Register news widget
         */
         public function register_news_widget() {
             // register_widget( 'news_Widget' );
         }
-
 
         /**
         * Register news post type
@@ -120,7 +111,6 @@ if ( ! class_exists( 'NewsPlugin' ) ) :
             );
         }
 
-
         /**
         * Register taxonomy to news
         */
@@ -134,7 +124,6 @@ if ( ! class_exists( 'NewsPlugin' ) ) :
             );
         }
 
-
         /**
         * Add the menu page
         */
@@ -142,7 +131,7 @@ if ( ! class_exists( 'NewsPlugin' ) ) :
             global $user_ID;
             $title = apply_filters( 'news_menu_title', 'Newsletter' );
             $capability = apply_filters( 'news_capability', 'edit_others_posts' );
-            
+
             $page = add_menu_page(
                 $title,
                 $title,
@@ -170,7 +159,6 @@ if ( ! class_exists( 'NewsPlugin' ) ) :
 
         }
 
-
         /**
         * Register admin styles
         */
@@ -196,7 +184,6 @@ if ( ! class_exists( 'NewsPlugin' ) ) :
             // do_action( 'news_register_admin_scripts' );
         }
 
-
         /**
         * Check our WordPress installation is compatible with news
         */
@@ -204,7 +191,6 @@ if ( ! class_exists( 'NewsPlugin' ) ) :
             $systemCheck = new newsSystemCheck();
             $systemCheck->check();
         }
-
 
         /**
         * Return the users saved view preference.
@@ -216,7 +202,6 @@ if ( ! class_exists( 'NewsPlugin' ) ) :
             }
             return 'tabs';
         }
-
 
         /**
         * Render the admin page
@@ -236,14 +221,11 @@ if ( ! class_exists( 'NewsPlugin' ) ) :
             <div class="wrap news">
                 <h1>Emails cadastrados</h1>
                 <ul>
-                    <?php
-                    foreach ($get_email as $value) { echo '<li>'.$value->email.'</li>'; }
-                    ?>
+                    <?php foreach ($get_email as $value) { echo '<li>'.$value->email.'</li>'; } ?>
                 </ul>
 
                 <!-- baixar xls -->
                 <?php
-
                 // for( $i=0; $i<1; $i++ ) {
                 //     $html[$i] = "";
                 //     $html[$i] .= "<table>";
@@ -276,15 +258,10 @@ if ( ! class_exists( 'NewsPlugin' ) ) :
                 // for( $i=0; $i<=count($get_email); $i++ ) {  
                 //     echo $html[$i];
                 // }
-
                 ?>
-
-
-
             </div>
             <?php
         }
-
 
         /**
         * render sub-menu page
@@ -296,7 +273,6 @@ if ( ! class_exists( 'NewsPlugin' ) ) :
             <?php
         }
 
-
         /**
         * Start output buffering.
         *
@@ -306,7 +282,6 @@ if ( ! class_exists( 'NewsPlugin' ) ) :
         public function start_resource_manager() {
             ob_start( array( $this, 'resource_manager' ) );
         }
-
 
         /**
         * Process the whole page output. Move link tags with an ID starting
@@ -336,7 +311,6 @@ if ( ! class_exists( 'NewsPlugin' ) ) :
             return $html->save();
         }
 
-
         /**
         * Create Tables
         */
@@ -354,7 +328,6 @@ if ( ! class_exists( 'NewsPlugin' ) ) :
             require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
             dbDelta( $sql );
         }
-
 
         /**
         * Add the help tab to the screen.
