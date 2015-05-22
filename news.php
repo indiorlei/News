@@ -213,9 +213,7 @@ if ( ! class_exists( 'NewsPlugin' ) ) :
             ?>
             <script type='text/javascript'>
             // code javascript
-            jQuery(document).ready(function() {
-
-            });
+            jQuery(document).ready(function() { });
             </script>
             <!-- body plugin -->
             <div class="wrap news">
