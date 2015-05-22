@@ -223,6 +223,8 @@ if ( ! class_exists( 'NewsPlugin' ) ) :
         */
         public function render_admin_page() {
             // code php of admin page
+            global $wpdb;
+            $get_email = $GLOBALS['wpdb']->get_results( "SELECT * FROM ". $wpdb->prefix ."newsletter;", OBJECT );
             ?>
             <script type='text/javascript'>
             // code javascript
@@ -232,9 +234,51 @@ if ( ! class_exists( 'NewsPlugin' ) ) :
             </script>
             <!-- body plugin -->
             <div class="wrap news">
-                
-                
-                <h1>Aqui vai o corpo do plugin</h1>
+                <h1>Emails cadastrados</h1>
+                <ul>
+                    <?php
+                    foreach ($get_email as $value) { echo '<li>'.$value->email.'</li>'; }
+                    ?>
+                </ul>
+
+                <!-- baixar xls -->
+                <?php
+
+                // for( $i=0; $i<1; $i++ ) {
+                //     $html[$i] = "";
+                //     $html[$i] .= "<table>";
+                //     $html[$i] .= "<tr>";
+                //     $html[$i] .= "<td><b>Email</b></td>";
+                //     $html[$i] .= "</tr>";
+                //     $html[$i] .= "</table>";
+                // }
+
+                // $i = 1;
+                // while( $ret = mysql_fetch_array( $get_email ) ) {
+                //     $email = $ret['email'];
+                //     $html[$i] .= "<table>";
+                //     $html[$i] .= "<tr>";
+                //     $html[$i] .= "<td>$email</td>";
+                //     $html[$i] .= "</tr>";
+                //     $html[$i] .= "</table>";
+                //     $i++;
+                // }
+
+                // $arquivo = 'emails.xls';
+                // // header ("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+                // header ("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
+                // header ("Cache-Control: no-cache, must-revalidate");
+                // header ("Pragma: no-cache");
+                // header ("Content-type: application/x-msexcel");
+                // header ("Content-Disposition: attachment; filename={$arquivo}" );
+                // header ("Content-Description: PHP Generated Data" );
+
+                // for( $i=0; $i<=count($get_email); $i++ ) {  
+                //     echo $html[$i];
+                // }
+
+                ?>
+
 
 
             </div>
