@@ -2,7 +2,7 @@
 /*
 Plugin Name: News
 Plugin URI: http://indiorlei.com/
-Description: Cadastro de Emails para newss
+Description: Cadastro de Emails para news
 Version: 1.0
 Author: Indiorlei de Oliveira
 Author URI: http://indiorlei.com/
